@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<HTML>
+
+  <head>
+  <style>
+
+  h1  {
+        background-color: white;
+        font-family: arial;
+        margin: 25px 450px 25px 450px;
+        border: 1px groove #6077a4;
+        border-radius: 8px;
+      }
+  table {
+          border: 1px groove #6077a4;
+          border-radius: 8px;
+        }
+  th {
+        height: 50px;
+        margin: auto;
+     }
+  td {
+        margin: auto;
+        border-bottom: 1px dotted #6077a4;
+     }
+  body {text-align:center;}
+  </style>
+  </head>
+  <body>
+
+<center><h1 style="color:#6077a4"> Registration </H1><center/>
+
+<body><body bgcolor="#e6e6ff"><form>
+
+<table style="font-family:arial;" align="center" bgcolor="#ffffff" class="center">
+  <tr>
+    <th></th>
+      <td><center> Name: </td>
+      <td>
+        <form action="/action_page.php">
+        <input type="text" name="name" placeholder="Enter your name">
+        <br>
+    </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Password: </td>
+        <td>
+          <form action="/action_page.php">
+            <input type="password" name="psw">
+          <br>
+      </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>E-mail: </td>
+      <td>
+        <form action="/action_page.php">
+          <input type="email" name="email">
+      </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Date of Birth: </td>
+      <td>
+        <form action="/action_page.php">
+          <input type="date" name="bday">
+      </td>
+    </th>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Grade: </td>
+      <td>
+        <form action="/action_page.php">
+        <input type="text" name="grade">
+        <br>
+      </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Gender: </td>
+      <td>
+        <form>
+        <input type="radio" name="gender" value="male" checked> Male<br>
+        <input type="radio" name="gender" value="female"> Female<br>
+    </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Marital status: </td>
+      <td>
+        <form action="/action_page.php">
+          <input type="radio" name="maritalstatus" value="Single" checked> Single<br>
+          <input type="radio" name="maritalstatus" value="Married"> Married<br>
+          <input type="radio" name="maritalstatus" value="Divorced"> Divorced<br>
+          <input type="radio" name="maritalstatus" value="Widower"> Widower<br>
+      </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Languages: </td>
+      <td>
+        <form action="/action_page.php">
+        <input type="checkbox" name="language1" value="English">English
+        <br>
+        <input type="checkbox" name="language2" value="German">German
+        <br>
+        <input type="checkbox" name="language3" value="Russian">Russian
+        <br>
+        <input type="checkbox" name="language4" value="Other">Other
+      </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Nationality: </td>
+      <td>
+        <form action="/action_page.php">
+          <select name="nations">
+            <option value="SK">Slovak</option>
+            <option value="CZ">Czech</option>
+            <option value="HG">Hungarian</option>
+            <option value="AU">Austrian</option>
+            <option value="UA">Ukrainian</option>
+            <option value="GB">British</option>
+            <option value="GM">German</option>
+            <option value="PL">Polish</option>
+            <option value="Other">Other</option>
+          </select>
+      </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Additional informations: </td>
+      <td>
+        <form action="/action_page.php">
+          <textarea name="message" rows="10" cols="30" placeholder="Write something about yourself:"></textarea>
+      </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Upload your CV: </td>
+      <td>
+        <form action="/action_page.php">
+          <input type="file" name="myFile">
+      </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center>Are you happy? </td>
+      <td>
+        <form action="/action_page.php">
+          Yes<input type="range" name="points" min="0" max="10">No
+      </td>
+  </tr>
+
+  <tr>
+    <th></th>
+      <td><center><input type="reset"></td>
+      <td>
+        <form action="/action_page.php">
+          <center><input type="submit">
+      </td>
+  </tr>
+
+
+</form>
