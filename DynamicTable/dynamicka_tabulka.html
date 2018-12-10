@@ -3,7 +3,6 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
-  .fem {background: color: #ffcccc;}
   body {font-family: Arial, Helvetica, sans-serif; background-image: linear-gradient(to bottom, #eeb44f, #f1b95e, #f3bd6c, #f5c279, #f7c787, #fec99b, #ffcdaf, #ffd2c1, #ffdbdb, #ffe7f0, #fcf4fc, #ffffff); background-repeat:no-repeat; text-align:center;}
   #divForm {margin: auto; width: 700px; padding: 30px; text-align:center;}
   #divForm td{width: 150px;}
@@ -57,8 +56,6 @@
     <button id="buttonL" name="btnLoad">Load Data</button>
   </center></div>
 <script type="text/javascript">
-
-  //document.getElementById("btnAdd").onclick = function {
 
   let persons=[];
   let count=0;
@@ -121,7 +118,6 @@
       else
         column4.text('Unknown');
 
-
       let column5=$('<td>');
       let text='deletePerson('+person.id+')';
       let image = $("<img>").attr({
@@ -141,11 +137,11 @@
       row.append(column5);
 
       if(person.gender=='M'){
-				row.attr('class', 'mal');
-			}
-			else if(person.gender=='F'){
-				row.attr('class', 'fem');
-			}
+		row.attr('class', 'mal');
+	}
+	else if(person.gender=='F'){
+		row.attr('class', 'fem');
+	}
 
       $('#tblResult').append(row);
       $('#fname').val('');
