@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+  .fem {background: color: #ffcccc;}
+  body {font-family: Arial, Helvetica, sans-serif; background-image: linear-gradient(to bottom, #eeb44f, #f1b95e, #f3bd6c, #f5c279, #f7c787, #fec99b, #ffcdaf, #ffd2c1, #ffdbdb, #ffe7f0, #fcf4fc, #ffffff); background-repeat:no-repeat; text-align:center;}
+  #divForm {margin: auto; width: 700px; padding: 30px; text-align:center;}
+  #divForm td{width: 150px;}
+  input[type='text'], input[type='number'] {width: 120px;}
+  #result {margin: auto; width: 700px;}
+  #result td {border:1px solid #eeb44f; width: 120px; background-color: #fce2c1; text-align:center;}
+  .fem {color: #ff99cc;}
+  .mal {color: #6699ff;}
+  #buttonS, #buttonL, #btnAdd {background-color:#ffc477;	border:1px solid #eeb44f;	display:inline-block;	cursor:pointer;	color:#ffffff;
+	font-family:Arial;	font-size:20px;	padding:10px 25px;	text-decoration:none;	text-shadow:0px 1px 0px #cc9f52;}
+  #buttonS:hover, #buttonL:hover, #btnAdd:hover {background-color:#fb9e25;}
+  #buttonS:active, #buttonL:active, #btnAdd:active {position:relative;	top:1px;}
+</style>
+</head>
+<body><center>
+  <div id="divForm">
+    <table>
+    <tr>
+      <td><label>First name:</label></td>
+      <td><label>Last name:</label></td>
+      <td><label>Age:</label></td>
+      <td><label>Gender:</label></td>
+      <td rowspan="2"><button id="btnAdd" onclick="btnAdd()">ADD</button></td>
+    </tr><tr>
+      <td><input type="text" id="fname"></td>
+      <td><input type="text" id="lname"></td>
+      <td><input type="number" id="age"></td>
+      <td><input type="radio" name="gender" value="M" id="M">Male<br>
+          <input type="radio" name="gender" value="F" id="F">Female</td>
+      </tr></table>
+  </div><br>
+
+  <div id="result">
+    <table class="tblResult" id="tblResult">
+      <thead>
+    <tr>
+      <td style="background-color:#FBD7A9;"><label onclick="sortById()">ID:</label></td>
+      <td style="background-color:#FBD7A9;"><label onclick="sortByFname()">First name:</label></td>
+      <td style="background-color:#FBD7A9;"><label onclick="sortByLname()">Last name:</label></td>
+      <td style="background-color:#FBD7A9;"><label onclick="sortByAge()">Age:</label></td>
+      <td style="background-color:#FBD7A9;"><label>Gender:</label></td>
+      <td style="background-color:#FBD7A9;"><label>Delete</label></td>
+    </tr>
+      </thead>
+      <tbody id="autoContent">
+      </tbody>
+    </table>
+  </div><br>
+  <div><center>
+    <button id="buttonS" name="btnSave">Save Data</button>
+    <button id="buttonL" name="btnLoad">Load Data</button>
+  </center></div>
+<script type="text/javascript">
+
+  //document.getElementById("btnAdd").onclick = function {
+
+  let persons=[];
+  let count=0;
+
+  function btnAdd(){
+    let fname=$('#fname').val();
+    let lname=$('#lname').val();
+    let age=$('#age').val();
+    let gender=$('input[name=gender]:checked').val();
+
+    let person= {
+      id:count,
+      fname:fname,
+      lname:lname,
+      age:age,
+      gender:gender
+    };
+
+    let fnameCheck=$('#fname').val();
+    let lnameCheck=$('#lname').val();
+    let ageCheck=$('#age').val();
+    if ((fnameCheck.length<2)||(lnameCheck.length<2)||(ageCheck.length<1)){
+      alert(tbl.rows[count-1].cells[0].children[0].value);
+    }
+    else {
+      count++;
+    }
+
+    persons.push(person);
+    renderTable(person);
+    console.log('name: '+persons);
+
+    }
+
+    const deletePerson=(id)=>{
+      console.log(id);
+      let index=persons.findIndex(x => {return  x.id===id} );
+      persons.splice(index,1);
+      let per=[...persons];
+      $('#autoContent').empty();
+      per.map(x=>{
+        renderTable(x);
+      });
+      persons=[...per];
+      console.log(per);
+    }
+
+    const renderTable = (person) => {
+
+      let column0=$('<td>').text(person.id);
+      let column1=$('<td>').text(person.fname);
+      let column2=$('<td>').text(person.lname);
+      let column3=$('<td>').text(person.age);
+      let column4=$('<td>');
+
+      if(person.gender=='M')
+        column4.text('Male');
+      else if(person.gender=='F')
+        column4.text('Female');
+      else
+        column4.text('Unknown');
+
+
+      let column5=$('<td>');
+      let text='deletePerson('+person.id+')';
+      let image = $("<img>").attr({
+        src:"x.png",
+        onclick:text,
+        onMouseOver:"$(this).attr({src:'xx.png'})",
+        onMouseOut:"$(this).attr({src:'x.png'})"
+      });
+      column5.append(image);
+
+      let row=$('<tr>');
+      row.append(column0);
+      row.append(column1);
+      row.append(column2);
+      row.append(column3);
+      row.append(column4);
+      row.append(column5);
+
+      if(person.gender=='M'){
+				row.attr('class', 'mal');
+			}
+			else if(person.gender=='F'){
+				row.attr('class', 'fem');
+			}
+
+      $('#tblResult').append(row);
+      $('#fname').val('');
+      $('#lname').val('');
+      $('#age').val('');
+    }
+
+    $('#buttonS').click( () => {
+      if(typeof(Storage) !== "undefined") {
+        let text=JSON.stringify(persons);
+        localStorage.setItem("persons",text);
+        localStorage.setItem("counter", count);
+      }
+    });
+
+    $('#buttonL').click( () => {
+      if(typeof(Storage) !== "undefined") {
+        let text=localStorage.getItem("persons");
+        count=localStorage.getItem("counter");
+        persons=JSON.parse(text);
+        $('#autoContent').empty();
+        persons.map(x => {
+        renderTable(x);
+        });
+      }
+    });
+
+    function changeImg(){
+      console.log('text');
+      $(this).attr('src', 'xx.png');
+    }
+
+    function sortByfname(){
+        persons.sort( (a,b)=> {
+          var nameA=a.fname.toLowerCase(), nameB=b.fname.toLowerCase();
+          if (nameA < nameB){return -1;}
+          if (nameA > nameB){return 1;}
+          return 0;
+    });
+    $('#autoContent').empty();
+      persons.map( x => {
+      renderTable(x);
+      });
+    }
+
+    function sortByLname(){
+      persons.sort( (a,b)=> {
+        var lnameA=a.lname.toLowerCase(), lnameB=b.lname.toLowerCase();
+        if (lnameA < lnameB){return -1;}
+        if (lnameA > lnameB){return 1;}
+        return 0;
+    });
+      $('#autoContent').empty();
+      persons.map( x => {
+      renderTable(x);
+      });
+    }
+
+    function sortById(){
+      persons.sort( (a,b)=> {
+          let c3=parseInt(a.id);
+          let c4=parseInt(b.id);
+          if (c3 < c4) {return -1;}
+          if (c3 > c4) {return 1;}
+          return 0;
+    });
+      $('#autoContent').empty();
+      persons.map( x => {
+      renderTable(x);
+      });
+    }
+
+    function sortByAge(){
+      persons.sort( (a,b)=> {
+        let c1=parseInt(a.age);
+        let c2=parseInt(b.age);
+        if (c1 < c2) {return -1;}
+        if (c1 > c2) {return 1;}
+        return 0;
+    });
+      $('#autoContent').empty();
+      persons.map( x => {
+      renderTable(x);
+      });
+    }
+
+</script>
+</body>
+</html>
